@@ -41,6 +41,8 @@ window.resizable(False,False)
 window.config(bg= maincolor)
 
 
+
+
 #GUI - Labels & Frame(cover result_label)
 line_text_label = Label(window, text='Priamka 0°\n[cm]', bg=maincolor, font=('Calibri', 11, 'bold'), fg=textcolor)   #relief='sunken' - fajn na check hranic
 line_text_label.grid(row=0, column=0,  padx=0 , pady=0, sticky='s')                                             #sticky='s' -taha smerom dole south
@@ -71,7 +73,27 @@ button_count.grid(row=1,column=1, padx=0,pady=0, sticky='n')
 
 
 
+# Vytvorenie hlavného menu
+menu_bar = Menu(window)
+window.config(menu=menu_bar)
 
+# --- 1️⃣ Súbor ---
+file_menu = Menu(menu_bar, tearoff=0)
+file_menu.add_command(label="Nový výpočet", command=lambda: print("Nový výpočet"))
+file_menu.add_separator()
+file_menu.add_command(label="Ukončiť", command=window.quit)
+menu_bar.add_cascade(label="Súbor", menu=file_menu)
+
+# --- 2️⃣ Nastavenia ---
+settings_menu = Menu(menu_bar, tearoff=0)
+settings_menu.add_command(label="Farba pozadia", command=lambda: print("Zmena farby"))
+settings_menu.add_command(label="Resetovať vstupy", command=lambda: print("Reset"))
+menu_bar.add_cascade(label="Nastavenia", menu=settings_menu)
+
+# --- 3️⃣ Pomocník ---
+help_menu = Menu(menu_bar, tearoff=0)
+help_menu.add_command(label="O programe", command=lambda: print("Verzia 1.0 – Igorov kalkulátor"))
+menu_bar.add_cascade(label="Pomocník", menu=help_menu)
 
 
 
