@@ -8,7 +8,7 @@ from tkinter import *
 import math
 
 
-#Function - terminal version
+#Function - terminal version/obsolete
 # def distance(length_cm, angle_degree):       
 #     # Prevod stupňov na radiány
 #     angle_rad = math.radians(angle_degree)
@@ -27,7 +27,6 @@ def distance():
     except ValueError:
         result_label.config(text="\nNezadal si číselné hodnoty!")
 
-
 #Colors
 maincolor = 'grey'
 textcolor = "white"
@@ -40,9 +39,6 @@ window.minsize(280,120)
 window.resizable(False,False)
 window.config(bg= maincolor)
 
-
-
-
 #GUI - Labels & Frame(cover result_label)
 line_text_label = Label(window, text='Priamka 0°\n[cm]', bg=maincolor, font=('Calibri', 11, 'bold'), fg=textcolor)   #relief='sunken' - fajn na check hranic
 line_text_label.grid(row=0, column=0,  padx=0 , pady=0, sticky='s')                                             #sticky='s' -taha smerom dole south
@@ -52,9 +48,8 @@ angle_text_label.grid(row=0, column=3, padx=0, pady=0, sticky='s')
 
 result_frame = Frame(window,bg=maincolor, width=150, height=40)             #Do tohoto Framu som umiestnil label a klucove je pouzit columnspan=4 - koľko stĺpcov má widget zaberať.
 result_frame.grid(row=2,column=0, columnspan=4, padx=0, pady=0)             #Do tohoto Framu som umiestnil label a klucove je pouzit !!!columnspan=4!!!- koľko stĺpcov má widget zaberať
-# result_frame.grid_propagate(False)                                #candidate to remove
+        #↓→               ↓
 result_label = Label(result_frame, text='Zadaj vstupné údaje', font=('Calibri', 12, 'bold'), bg=maincolor, fg=textcolor)        #INFO after start
-# result_label.pack(expand=True, fill=BOTH)                         #candidate to remove
 result_label.grid(row=2, column=1, padx=0, pady=0)
 
 #GUI - User inputs
@@ -74,7 +69,6 @@ button_count.grid(row=1,column=1, padx=0,pady=0, sticky='n')
 
 #Menu
 #Menu funkcie
-
 def quit_app():
     window.quit()
 
