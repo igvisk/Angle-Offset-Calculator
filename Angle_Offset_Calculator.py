@@ -1,19 +1,16 @@
-#Sirka otvoru pri danom uhle a hlbke
+#Angle Offset Calculator - Sirka otvoru pri danom uhle a dlzke
 
 # Geometrický model:
-#skript kde zadam dlzku prvej priamky, uhol 5 stupnov a vyrata mi dlzku tretej priamky (otvoru), 
-# ktora je voci prvej priamke(ktora lezi na 0° (kt zadavame dlzku) ) v 90° uhle.
+# Vstupy: 
+#   1. Dĺžka základnej priamky
+#   2. Uhol sklonu druhej priamky (prednastavená hodnota 5°)
+# Výstupy:
+#   1. Vypočítaná dĺžka tretej priamky (kolmá na základnú) – dĺžka vznikajúceho otvoru
+#   2. Grafické zobrazenie trojuholníka vo widgete Tkinter Canvas
 
 from tkinter import *
 import math
 
-
-#Function - terminal version/obsolete
-# def distance(length_cm, angle_degree):       
-#     # Prevod stupňov na radiány
-#     angle_rad = math.radians(angle_degree)
-#     # Vzdialenosť = dĺžka * tan(uhol)
-#     return length_cm * math.tan(angle_rad)
 
 def distance():
     try:
@@ -27,6 +24,33 @@ def distance():
     except ValueError:
         result_label.config(text="\nNezadal si číselné hodnoty!")
 
+    draw_triangle(length_cm, opening_result, angle_degree)                  # goes to function draw_trianhle(1.base,2.height,3.angle)
+
+    #=== Funkcia na vykreslenie trojuholníka ===
+def draw_triangle(base, height, angle):
+    canvas.delete("all")  # vyčistí predchádzajúci nákres
+
+    # mierka - 1 cm = 5 px
+    scale = 5
+    base_px = base * scale
+    height_px = height * scale
+
+    # súradnice
+    x0, y0 = 30, 220
+    x1, y1 = x0 + base_px, y0
+    x2, y2 = x1, y1 - height_px
+
+    # trojuholník
+    canvas.create_line(x0, y0, x1, y1, fill="white", width=1)   # základňa
+    canvas.create_line(x1, y1, x2, y2, fill="red", width=4)     # výška (otvor)
+    canvas.create_line(x0, y0, x2, y2, fill="yellow", width=1)  # šikmá priamka
+
+    # popisy
+    canvas.create_text(x0 + base_px/2, y0 + 15, text=f"{base} cm", fill="white", font=('Calibri', 9))
+    canvas.create_text(x1 + 25, y1 - height_px/2, text=f"{round(height,2)} cm", fill="red", font=('Calibri', 9, 'bold'))
+    canvas.create_text(x0 + 50, y0 - 20, text=f"{angle}°", fill="white", font=('Calibri', 9))
+
+
 #Colors
 maincolor = 'grey'
 textcolor = "white"
@@ -35,7 +59,7 @@ inputtextcolor = 'black'
 #GUI - basic
 window = Tk()
 window.title('Uhlový kalkulátor otvoru')
-window.minsize(280,120)
+window.minsize(280,300)
 window.resizable(False,False)
 window.config(bg= maincolor)
 
@@ -49,7 +73,7 @@ angle_text_label.grid(row=0, column=3, padx=0, pady=0, sticky='s')
 result_frame = Frame(window,bg=maincolor, width=150, height=40)             #Do tohoto Framu som umiestnil label a klucove je pouzit columnspan=4 - koľko stĺpcov má widget zaberať.
 result_frame.grid(row=2,column=0, columnspan=4, padx=0, pady=0)             #Do tohoto Framu som umiestnil label a klucove je pouzit !!!columnspan=4!!!- koľko stĺpcov má widget zaberať
         #↓→               ↓
-result_label = Label(result_frame, text='Zadaj vstupné údaje', font=('Calibri', 12, 'bold'), bg=maincolor, fg=textcolor)        #INFO after start
+result_label = Label(result_frame, text='\nZadaj vstupné údaje', font=('Calibri', 12, 'bold'), bg=maincolor, fg=textcolor)        #INFO after start
 result_label.grid(row=2, column=1, padx=0, pady=0)
 
 #GUI - User inputs
@@ -65,6 +89,12 @@ angle_input.grid(row=1, column=3, padx=10,pady=0, sticky='n')
 #GUI - Button
 button_count = Button(window, text='Vypočítaj', font=('Calibri', 10), command=distance)
 button_count.grid(row=1,column=1, padx=0,pady=0, sticky='n')
+
+# === Frame pre grafické znázornenie + Tkinter Canvas ===
+canvas_frame = Frame(window, bg='black', width=280, height=250)
+canvas_frame.grid(row=3, column=0, columnspan=4, padx=10, pady=10)
+canvas = Canvas(canvas_frame, bg='black', width=280, height=250)                                                #Tkinter - Canvas widget pre kreslenie
+canvas.pack()
 
 
 #Menu
@@ -82,7 +112,7 @@ def show_about():
     "Aplikácia: Uhlový kalkulátor otvoru\n" \
     "Verzia: 1.1\n" \
     "\n\nAutor:     Igor Vitovský\n" \
-    "Email:     igvisk.pro@gmail.com\n" \
+    "e-mail:   igvisk.pro@gmail.com\n" \
     "GitHub: github.com/igvisk\n" \
     "Copyright © 2025 Igor Vitovský", 
     bg=maincolor, font=('Calibri', 11, 'bold'), fg=textcolor, justify=LEFT)
@@ -119,15 +149,3 @@ window.bind("<F1>", lambda event: show_about())
 
 #Tkinter Mainloop
 window.mainloop()
-
-
-
-#terminal version /obsolete
-# Príklady
-# print("8,8 cm pri 5°:", round(vzdialenost(8.8, 5), 2), "cm")      # → 0,77 cm
-
-# print("17 cm pri 5°:", round(vzdialenost(17, 5), 2), "cm")        # → 1.49 cm
-
-#Zadaj vlastnu dlzku
-# length_cm = float(input("Zadaj dlzku priamky leziacej na 0°: "))
-# print(f"{length_cm} cm pri 5°, vychýlenie:", round(distance(length_cm, 5), 2), "cm")
