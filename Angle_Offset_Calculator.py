@@ -72,10 +72,7 @@ button_count = Button(window, text='Vypočítaj', font=('Calibri', 10), command=
 button_count.grid(row=1,column=1, padx=0,pady=0, sticky='n')
 
 
-
-
 #Menu
-
 #Menu funkcie
 
 def quit_app():
