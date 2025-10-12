@@ -110,7 +110,7 @@ def show_about():
     about_window.config(bg= maincolor)
     about_window_label = Label(about_window, text=
     "Aplikácia: Uhlový kalkulátor otvoru\n" \
-    "Verzia: 1.1\n" \
+    "Verzia: 1.2\n" \
     "\n\nAutor:     Igor Vitovský\n" \
     "e-mail:   igvisk.pro@gmail.com\n" \
     "GitHub: github.com/igvisk\n" \
