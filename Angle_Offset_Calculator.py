@@ -11,6 +11,8 @@
 
 from tkinter import *
 import math
+import os
+
 
 def distance():
     try:
@@ -65,6 +67,8 @@ window.title(f'Angle Offset {version}')
 window.minsize(280,300)
 window.resizable(False,False)
 window.config(bg= maincolor)
+ico_path = os.path.join(os.path.dirname(__file__), "icon.ico")         #ziska absolutnu cestu k suboru
+window.iconbitmap(ico_path)                                         
 
 #GUI - Labels & Frame(cover result_label)
 line_text_label = Label(window, text='Priamka 0°\n[cm]', bg=maincolor, font=('Calibri', 11, 'bold'), fg=textcolor)   #relief='sunken' - fajn na check hranic
@@ -106,6 +110,7 @@ def quit_app():
 
 def show_about():
     about_window = Tk()
+    about_window.iconbitmap(ico_path)
     about_window.title('About')
     about_window.minsize(280,120)
     about_window.resizable(False,False)
