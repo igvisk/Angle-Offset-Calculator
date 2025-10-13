@@ -2,11 +2,12 @@
 
 # Geometrický model:
 # Vstupy: 
-#   1. Dĺžka základnej priamky
-#   2. Uhol sklonu druhej priamky (prednastavená hodnota 5°)
+#   1. Dĺžka základnej priamky  -prilahlej odvesny
+#   2. Uhol sklonu druhej priamky (prednastavená hodnota 5°)    -prepona (hypotenuse)
 # Výstupy:
-#   1. Vypočítaná dĺžka tretej priamky (kolmá na základnú) – dĺžka vznikajúceho otvoru
+#   1. Vypočítaná dĺžka tretej priamky (kolmá na základnú) – dĺžka vzniknutého otvoru -protilahla odvesna
 #   2. Grafické zobrazenie trojuholníka vo widgete Tkinter Canvas
+#   3. Vypočítaná dĺžka šikmej priamky (prepony) zobrazená vo widgete Canvas
 
 from tkinter import *
 import math
@@ -20,7 +21,6 @@ def distance():
         # Vzdialenosť = dĺžka * tan(uhol)
         opening_result = length_cm * math.tan(angle_rad)                    #!vypocet dlzky kolmice/otvoru pre zadany uhol - protilahla odvesna
         hypotenuse = math.sqrt(length_cm**2 + opening_result**2)            #vypocet prepony
-        
         result_label.config(text=f'Pri uhle {angle_degree}° vznikne otvor:\n{round(opening_result,2)} cm')          #ak potrebne, dopln info o prepone " /prepona: {round(hypotenuse,2)}cm"
     except ValueError:
         result_label.config(text="\nNezadal si číselné hodnoty!")
@@ -44,7 +44,7 @@ def draw_triangle(base, height, angle, hypotenuse):
     # trojuholník
     canvas.create_line(x0, y0, x1, y1, fill="white", width=1)   # základňa
     canvas.create_line(x1, y1, x2, y2, fill="red", width=4)     # výška (otvor)
-    canvas.create_line(x0, y0, x2, y2, fill="yellow", width=1)  # šikmá priamka / odvesna(hypotenuse)
+    canvas.create_line(x0, y0, x2, y2, fill="yellow", width=1)  # šikmá priamka / prepona(hypotenuse)
 
     # popisy
     canvas.create_text(x0 + base_px/2, y0 + 15, text=f"{base} cm", fill="white", font=('Calibri', 9))
