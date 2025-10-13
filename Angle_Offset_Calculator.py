@@ -13,7 +13,7 @@ import math
 
 def distance():
     try:
-        length_cm = float(length_input.get().replace(',', '.'))             #prilahla odvesna
+        length_cm = float(length_input.get().replace(',', '.'))             #prilahla odvesna + .replace ochrana proti zadaniu ciarky (dlzka vodorovnej ciary/zakladne leziacej na 0°)
         angle_degree = float(angle_input.get().replace(',', '.'))
         # Prevod stupňov na radiány
         angle_rad = math.radians(angle_degree)
@@ -44,7 +44,7 @@ def draw_triangle(base, height, angle, hypotenuse):
     # trojuholník
     canvas.create_line(x0, y0, x1, y1, fill="white", width=1)   # základňa
     canvas.create_line(x1, y1, x2, y2, fill="red", width=4)     # výška (otvor)
-    canvas.create_line(x0, y0, x2, y2, fill="yellow", width=1)  # šikmá priamka
+    canvas.create_line(x0, y0, x2, y2, fill="yellow", width=1)  # šikmá priamka / odvesna(hypotenuse)
 
     # popisy
     canvas.create_text(x0 + base_px/2, y0 + 15, text=f"{base} cm", fill="white", font=('Calibri', 9))
@@ -99,7 +99,6 @@ canvas_frame.grid(row=3, column=0, columnspan=4, padx=10, pady=10)
 canvas = Canvas(canvas_frame, bg='black', width=280, height=250)                                                #Tkinter - Canvas widget pre kreslenie
 canvas.pack()
 
-
 #Menu
 #Menu funkcie
 def quit_app():
@@ -120,7 +119,6 @@ def show_about():
     f"Copyright © 2025 Igor Vitovský", 
     bg=maincolor, font=('Calibri', 11, 'bold'), fg=textcolor, justify=LEFT)
     about_window_label.grid()
-
 
 # Vytvorenie hlavného menu
 menu_bar = Menu(window)
