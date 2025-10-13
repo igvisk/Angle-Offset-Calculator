@@ -62,7 +62,7 @@ inputtextcolor = 'black'
 #GUI - basic
 window = Tk()
 window.title(f'Uhlový kalkulátor otvoru {version}')
-window.minsize(315,300)
+window.minsize(280,300)
 window.resizable(False,False)
 window.config(bg= maincolor)
 
