@@ -3,9 +3,9 @@
 # Geometrický model:
 # Vstupy: 
 #   1. Dĺžka základnej priamky  -prilahlej odvesny
-#   2. Uhol sklonu druhej priamky (prednastavená hodnota 5°)    -prepona (hypotenuse)
+#   2. Uhol sklonu druhej priamky (prednastavená hodnota 5°) -prepona (hypotenuse)
 # Výstupy:
-#   1. Vypočítaná dĺžka tretej priamky (kolmá na základnú) – dĺžka vzniknutého otvoru -protilahla odvesna
+#   1. Vypočítaná dĺžka tretej priamky (kolmá na základnú) – dĺžka vzniknutého otvoru -protiľahlá odvesna
 #   2. Grafické zobrazenie trojuholníka vo widgete Tkinter Canvas
 #   3. Vypočítaná dĺžka šikmej priamky (prepony) zobrazená vo widgete Canvas
 
@@ -50,11 +50,11 @@ def draw_triangle(base, height, angle, hypotenuse):
 
     # popisy
     canvas.create_text(x0 + base_px/2, y0 + 15, text=f"{base} cm", fill="white", font=('Calibri', 9))
-    canvas.create_text(x1 + 25, y1 - height_px/2, text=f"{round(height,2)} cm", fill="red", font=('Calibri', 9, 'bold'))        #otvor text
+    canvas.create_text(x1 + 25, y1 - height_px/2, text=f"{round(height,2)} cm", fill="red", font=('Calibri', 9, 'bold'))                 #otvor text
     canvas.create_text(x0 + 50, y0 - 20, text=f"{angle}°", fill="white", font=('Calibri', 9))
     canvas.create_text(x0 , y1 -10 - height_px/3, text=f"{round(hypotenuse,2)} cm", fill='yellow', font=('Calibri', 9))                  #prepona text
 
-version = 1.2
+version = 1.2                                                                                                                            #verzia appky, zobrazena vo window.title, about_window
 
 #Colors
 maincolor = 'grey'
