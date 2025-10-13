@@ -1,4 +1,4 @@
-#Angle Offset Calculator - Sirka otvoru pri danom uhle a dlzke
+#Angle Offset Calculator - Uhlový Kalkulátor Otvoru - Sirka otvoru pri danom uhle a dlzke
 
 # Geometrický model:
 # Vstupy: 
@@ -61,7 +61,7 @@ inputtextcolor = 'black'
 
 #GUI - basic
 window = Tk()
-window.title(f'Uhlový kalkulátor otvoru {version}')
+window.title(f'Angle Offset {version}')
 window.minsize(280,300)
 window.resizable(False,False)
 window.config(bg= maincolor)
