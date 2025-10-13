@@ -13,20 +13,22 @@ import math
 
 def distance():
     try:
-        length_cm = float(length_input.get().replace(',', '.'))
+        length_cm = float(length_input.get().replace(',', '.'))             #prilahla odvesna
         angle_degree = float(angle_input.get().replace(',', '.'))
         # Prevod stupňov na radiány
         angle_rad = math.radians(angle_degree)
         # Vzdialenosť = dĺžka * tan(uhol)
-        opening_result = length_cm * math.tan(angle_rad)   
-        result_label.config(text=f'Pri uhle {angle_degree}° vznikne otvor:\n{round(opening_result,2)} cm')
+        opening_result = length_cm * math.tan(angle_rad)                    #!vypocet dlzky kolmice/otvoru pre zadany uhol - protilahla odvesna
+        hypotenuse = math.sqrt(length_cm**2 + opening_result**2)            #vypocet prepony
+        
+        result_label.config(text=f'Pri uhle {angle_degree}° vznikne otvor:\n{round(opening_result,2)} cm')          #ak potrebne, dopln info o prepone " /prepona: {round(hypotenuse,2)}cm"
     except ValueError:
         result_label.config(text="\nNezadal si číselné hodnoty!")
 
-    draw_triangle(length_cm, opening_result, angle_degree)                  # goes to function draw_trianhle(1.base,2.height,3.angle)
+    draw_triangle(length_cm, opening_result, angle_degree, hypotenuse)                                              # goes to function draw_triangle(1.base,2.height,3.angle,4.hypotenuse/prepona)
 
     #=== Funkcia na vykreslenie trojuholníka ===
-def draw_triangle(base, height, angle):
+def draw_triangle(base, height, angle, hypotenuse):
     canvas.delete("all")  # vyčistí predchádzajúci nákres
 
     # mierka - 1 cm = 5 px
@@ -46,8 +48,9 @@ def draw_triangle(base, height, angle):
 
     # popisy
     canvas.create_text(x0 + base_px/2, y0 + 15, text=f"{base} cm", fill="white", font=('Calibri', 9))
-    canvas.create_text(x1 + 25, y1 - height_px/2, text=f"{round(height,2)} cm", fill="red", font=('Calibri', 9, 'bold'))
+    canvas.create_text(x1 + 25, y1 - height_px/2, text=f"{round(height,2)} cm", fill="red", font=('Calibri', 9, 'bold'))        #otvor text
     canvas.create_text(x0 + 50, y0 - 20, text=f"{angle}°", fill="white", font=('Calibri', 9))
+    canvas.create_text(x0 + 10, y1 - 10, text=f"{round(hypotenuse,2)} cm", fill='yellow', font=('Calibri', 9))                  #prepona text
 
 version = 1.2
 
