@@ -11,7 +11,6 @@
 from tkinter import *
 import math
 
-
 def distance():
     try:
         length_cm = float(length_input.get().replace(',', '.'))
@@ -50,6 +49,7 @@ def draw_triangle(base, height, angle):
     canvas.create_text(x1 + 25, y1 - height_px/2, text=f"{round(height,2)} cm", fill="red", font=('Calibri', 9, 'bold'))
     canvas.create_text(x0 + 50, y0 - 20, text=f"{angle}°", fill="white", font=('Calibri', 9))
 
+version = 1.2
 
 #Colors
 maincolor = 'grey'
@@ -58,8 +58,8 @@ inputtextcolor = 'black'
 
 #GUI - basic
 window = Tk()
-window.title('Uhlový kalkulátor otvoru')
-window.minsize(280,300)
+window.title(f'Uhlový kalkulátor otvoru {version}')
+window.minsize(315,300)
 window.resizable(False,False)
 window.config(bg= maincolor)
 
@@ -109,12 +109,12 @@ def show_about():
     about_window.resizable(False,False)
     about_window.config(bg= maincolor)
     about_window_label = Label(about_window, text=
-    "Aplikácia: Uhlový kalkulátor otvoru\n" \
-    "Verzia: 1.2\n" \
-    "\n\nAutor:     Igor Vitovský\n" \
-    "e-mail:   igvisk.pro@gmail.com\n" \
-    "GitHub: github.com/igvisk\n" \
-    "Copyright © 2025 Igor Vitovský", 
+    f"Aplikácia: Uhlový kalkulátor otvoru\n"
+    f"Verzia: {version}\n"
+    f"\n\nAutor:     Igor Vitovský\n"
+    f"e-mail:   igvisk.pro@gmail.com\n"
+    f"GitHub: github.com/igvisk\n"
+    f"Copyright © 2025 Igor Vitovský", 
     bg=maincolor, font=('Calibri', 11, 'bold'), fg=textcolor, justify=LEFT)
     about_window_label.grid()
 
