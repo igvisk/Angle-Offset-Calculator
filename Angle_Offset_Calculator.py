@@ -13,7 +13,7 @@ from tkinter import *
 import math
 import os
 
-version = 1.2 
+version = 1.3
 
 def distance():
     try:
@@ -53,7 +53,11 @@ def draw_triangle(base, height, angle, hypotenuse):
     canvas.create_text(x0 + base_px/2, y0 + 15, text=f"{base} cm", fill="white", font=('Calibri', 9))
     canvas.create_text(x1 + 25, y1 - height_px/2, text=f"{round(height,2)} cm", fill="red", font=('Calibri', 9, 'bold'))                 #otvor text
     canvas.create_text(x0 + 50, y0 - 20, text=f"{angle}°", fill="white", font=('Calibri', 9))
-    canvas.create_text(x0 , y1 -10 - height_px/3, text=f"{round(hypotenuse,2)} cm", fill='yellow', font=('Calibri', 9))                  #prepona text                                                                                                                           #verzia appky, zobrazena vo window.title, about_window
+    canvas.create_text(x0 , y1 -10 - height_px/3, text=f"{round(hypotenuse,2)} cm", fill='yellow', font=('Calibri', 9))                  #prepona text
+    
+    # dynamicke nastavenie scroll-regionu podla velkosti trojuholnika
+    canvas.config(scrollregion=canvas.bbox("all"))                                                                                       
+
 
 #Colors
 maincolor = 'grey'
@@ -96,11 +100,27 @@ angle_input.grid(row=1, column=3, padx=10,pady=0, sticky='n')
 button_count = Button(window, text='Vypočítaj', font=('Calibri', 10), command=distance)
 button_count.grid(row=1,column=1, padx=0,pady=0, sticky='n')
 
-# === Frame pre grafické znázornenie + Tkinter Canvas ===
+# === Frame pre grafické znázornenie + Tkinter Canvas + Scrollbary ===
 canvas_frame = Frame(window, bg='black', width=280, height=250)
 canvas_frame.grid(row=3, column=0, columnspan=4, padx=10, pady=10)
-canvas = Canvas(canvas_frame, bg='black', width=280, height=250)                                                #Tkinter - Canvas widget pre kreslenie
-canvas.pack()
+#Scrollbary
+canvas_y_scroll = Scrollbar(canvas_frame, orient=VERTICAL)
+canvas_y_scroll.grid(row=0, column=1, sticky=N+S)
+
+canvas_x_scroll = Scrollbar(canvas_frame, orient=HORIZONTAL)
+canvas_x_scroll.grid(row=1, column=0, sticky=E+W)
+
+#Canvas
+canvas = Canvas(canvas_frame, bg='black', width=280, height=250,        #Tkinter - Canvas widget pre kreslenie + scrollbary
+                yscrollcommand=canvas_y_scroll.set,
+                xscrollcommand=canvas_x_scroll.set,
+                scrollregion=(-10000, -10000, 10000, 10000))                                                
+
+canvas.grid(row=0, column=0)
+#Prepojenie scrollbarov s Canvasom
+canvas_y_scroll.config(command=canvas.yview)
+canvas_x_scroll.config(command=canvas.xview)
+# ===================================================================
 
 #Menu
 #Menu funkcie
