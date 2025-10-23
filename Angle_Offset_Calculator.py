@@ -56,7 +56,18 @@ def draw_triangle(base, height, angle, hypotenuse):
     canvas.create_text(x0 , y1 -10 - height_px/3, text=f"{round(hypotenuse,2)} cm", fill='yellow', font=('Calibri', 9))                  #prepona text
     
     # dynamicke nastavenie scroll-regionu podla velkosti trojuholnika
-    canvas.config(scrollregion=canvas.bbox("all"))                                                                                       
+    canvas.config(scrollregion=canvas.bbox("all")) 
+
+# Dragovanie mysou po canvase
+def enable_drag(canvas_widget):
+    def start_drag(event):
+        canvas_widget.scan_mark(event.x, event.y)
+    def drag(event):
+        canvas_widget.scan_dragto(event.x, event.y, gain=1)
+
+    canvas_widget.bind("<ButtonPress-1>", start_drag)
+    canvas_widget.bind("<B1-Motion>", drag)
+                                                                                      
 
 
 #Colors
@@ -115,8 +126,11 @@ canvas = Canvas(canvas_frame, bg='black', width=280, height=250,        #Tkinter
                 yscrollcommand=canvas_y_scroll.set,
                 xscrollcommand=canvas_x_scroll.set,
                 scrollregion=(-10000, -10000, 10000, 10000))                                                
-
 canvas.grid(row=0, column=0)
+
+enable_drag(canvas)                                                     #aktivacia dragovania v ramci canvas!
+
+
 #Prepojenie scrollbarov s Canvasom
 canvas_y_scroll.config(command=canvas.yview)
 canvas_x_scroll.config(command=canvas.xview)
