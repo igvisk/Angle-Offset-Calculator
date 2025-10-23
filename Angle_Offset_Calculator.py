@@ -2,7 +2,7 @@
 
 # Geometrický model:
 # Vstupy: 
-#   1. Dĺžka základnej priamky  -prilahlej odvesny
+#   1. Dĺžka základnej priamky  -priľahlej odvesny
 #   2. Uhol sklonu druhej priamky (prednastavená hodnota 5°) -prepona (hypotenuse)
 # Výstupy:
 #   1. Vypočítaná dĺžka tretej priamky (kolmá na základnú) – dĺžka vzniknutého otvoru -protiľahlá odvesna
@@ -71,39 +71,41 @@ def enable_drag(canvas_widget):
 
 
 #Colors
-maincolor = 'grey'
-textcolor = "white"
-inputtextcolor = 'black'
+main_color = 'grey'
+text_color = "white"
+inputtext_color = 'black'
 
 #GUI - basic
 window = Tk()
 window.title(f'Angle Offset {version}')
 window.minsize(280,300)
 window.resizable(False,False)
-window.config(bg= maincolor)
+window.config(bg= main_color)
+
+#Ikona
 ico_path = os.path.join(os.path.dirname(__file__), "icon.ico")         #ziska absolutnu cestu k suboru
 window.iconbitmap(ico_path)                                         
 
 #GUI - Labels & Frame(cover result_label)
-line_text_label = Label(window, text='Priamka 0°\n[cm]', bg=maincolor, font=('Calibri', 11, 'bold'), fg=textcolor)   #relief='sunken' - fajn na check hranic
+line_text_label = Label(window, text='Priamka 0°\n[cm]', bg=main_color, font=('Calibri', 11, 'bold'), fg=text_color)   #relief='sunken' - fajn na check hranic
 line_text_label.grid(row=0, column=0,  padx=0 , pady=0, sticky='s')                                             #sticky='s' -taha smerom dole south
 
-angle_text_label = Label(window, text='Uhol -fix 5°\n[°]', bg=maincolor, font=('Calibri', 11, 'bold'), fg=textcolor)
+angle_text_label = Label(window, text='Uhol -fix 5°\n[°]', bg=main_color, font=('Calibri', 11, 'bold'), fg=text_color)
 angle_text_label.grid(row=0, column=3, padx=0, pady=0, sticky='s')
 
-result_frame = Frame(window,bg=maincolor, width=150, height=40)             #Do tohoto Framu som umiestnil label a klucove je pouzit columnspan=4 - koľko stĺpcov má widget zaberať.
+result_frame = Frame(window,bg=main_color, width=150, height=40)             #Do tohoto Framu som umiestnil label a klucove je pouzit columnspan=4 - koľko stĺpcov má widget zaberať.
 result_frame.grid(row=2,column=0, columnspan=4, padx=0, pady=0)             #Do tohoto Framu som umiestnil label a klucove je pouzit !!!columnspan=4!!!- koľko stĺpcov má widget zaberať
         #↓→               ↓
-result_label = Label(result_frame, text='\nZadaj vstupné údaje', font=('Calibri', 12, 'bold'), bg=maincolor, fg=textcolor)        #INFO after start
+result_label = Label(result_frame, text='\nZadaj vstupné údaje', font=('Calibri', 12, 'bold'), bg=main_color, fg=text_color)        #INFO after start
 result_label.grid(row=2, column=1, padx=0, pady=0)
 
 #GUI - User inputs
-length_input = Entry(window, width=10, font=("Calibri", 12), fg=inputtextcolor, justify=CENTER)
+length_input = Entry(window, width=10, font=("Calibri", 12), fg=inputtext_color, justify=CENTER)
 length_input.insert(0,'0')                                                                                      #(0-pozicia v texte,'default hodnota zobraz sa pri spusteni')
 length_input.grid(row=1, column=0, padx=10,pady=0, sticky='n')                                                  #sticky='n' taha smerom hore k line_text_label n-north
 
 
-angle_input = Entry(window, width=10, font=("Calibri", 12), fg=inputtextcolor, justify=CENTER)
+angle_input = Entry(window, width=10, font=("Calibri", 12), fg=inputtext_color, justify=CENTER)
 angle_input.insert(0,'5')                                                                                       #(0-pozicia v texte,'default hodnota zobraz sa pri spusteni')
 angle_input.grid(row=1, column=3, padx=10,pady=0, sticky='n')
 
@@ -147,7 +149,7 @@ def show_about():
     about_window.title('About')
     about_window.minsize(280,120)
     about_window.resizable(False,False)
-    about_window.config(bg= maincolor)
+    about_window.config(bg= main_color)
     about_window_label = Label(about_window, text=
     f"Aplikácia: Uhlový kalkulátor otvoru\n"
     f"Verzia: {version}\n"
@@ -155,7 +157,7 @@ def show_about():
     f"e-mail:   igvisk.pro@gmail.com\n"
     f"GitHub: github.com/igvisk\n"
     f"Copyright © 2025 Igor Vitovský", 
-    bg=maincolor, font=('Calibri', 11, 'bold'), fg=textcolor, justify=LEFT)
+    bg=main_color, font=('Calibri', 11, 'bold'), fg=text_color, justify=LEFT)
     about_window_label.grid()
 
 # Vytvorenie hlavného menu
