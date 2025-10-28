@@ -72,8 +72,6 @@ def enable_drag(canvas_widget):
     canvas_widget.bind("<ButtonPress-1>", start_drag)
     canvas_widget.bind("<B1-Motion>", drag)
                                                                                       
-
-
 #Colors
 main_color = 'grey'
 text_color = "white"
@@ -84,13 +82,9 @@ window = Tk()
 window.title(f'Angle Offset {version}')
 window.resizable(False,False)
 window.config(bg= main_color)
-
-
-# window_width = 320
-# window_height = 425
     
 #Ikona
-ico_path = os.path.join(os.path.dirname(__file__), "icon.ico")         #ziska absolutnu cestu k suboru
+ico_path = os.path.join(os.path.dirname(__file__), "icon.ico")                                                  #ziska absolutnu cestu k suboru
 window.iconbitmap(ico_path)                                         
 
 #GUI - Labels & Frame(cover result_label)
@@ -100,10 +94,10 @@ line_text_label.grid(row=0, column=0,  padx=0 , pady=0, sticky='s')             
 angle_text_label = Label(window, text='Uhol -fix 5°\n[°]', bg=main_color, font=('Calibri', 11, 'bold'), fg=text_color)
 angle_text_label.grid(row=0, column=3, padx=0, pady=0, sticky='s')
 
-result_frame = Frame(window,bg=main_color, width=150, height=40)             #Do tohoto Framu som umiestnil label a klucove je pouzit columnspan=4 - koľko stĺpcov má widget zaberať.
-result_frame.grid(row=2,column=0, columnspan=4, padx=0, pady=0)             #Do tohoto Framu som umiestnil label a klucove je pouzit !!!columnspan=4!!!- koľko stĺpcov má widget zaberať
+result_frame = Frame(window,bg=main_color, width=150, height=40)                                               #Do tohoto Framu som umiestnil label a klucove je pouzit columnspan=4 - koľko stĺpcov má widget zaberať.
+result_frame.grid(row=2,column=0, columnspan=4, padx=0, pady=0)                                                #Do tohoto Framu som umiestnil label a klucove je pouzit !!!columnspan=4!!!- koľko stĺpcov má widget zaberať
         #↓→               ↓
-result_label = Label(result_frame, text='\nZadaj vstupné údaje', font=('Calibri', 12, 'bold'), bg=main_color, fg=text_color)        #INFO after start
+result_label = Label(result_frame, text='\nZadaj vstupné údaje', font=('Calibri', 12, 'bold'), bg=main_color, fg=text_color)        #INFO start
 result_label.grid(row=2, column=1, padx=0, pady=0)
 
 #GUI - User inputs
@@ -151,7 +145,7 @@ def quit_app():
 
 def show_about():
     about_window = Tk()
-    center_window(about_window, 280, 170, 310, -135)                               #vycentrovanie about_window (window_name, window_width, window_height, offset_x, offset_y)
+    center_window(about_window, 280, 170, 310, -118)                               #vycentrovanie about_window (window_name, window_width, window_height, offset_x, offset_y)
     about_window.iconbitmap(ico_path)
     about_window.title('About')
     about_window.resizable(False,False)
@@ -196,7 +190,7 @@ window.bind("<F1>", lambda event: show_about())
 
 
 
-center_window(window, 320, 405, 0, 0)                                     #centrovanie main window !musi byt na konci aby tkinter nacital vsetky widgety
+center_window(window, 320, 405, 0, 0)                                     #centrovanie a rozmery main window !musi byt na konci aby tkinter nacital vsetky widgety
 
 #Tkinter Mainloop
 window.mainloop()
