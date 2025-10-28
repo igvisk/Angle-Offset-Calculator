@@ -30,6 +30,15 @@ def distance():
 
     draw_triangle(length_cm, opening_result, angle_degree, hypotenuse)                                              # goes to function draw_triangle(1.base,2.height,3.angle,4.hypotenuse/prepona)
 
+def center_window(window, width, height, shift_x, shift_y):                                                         #vycentrovanie okna v ramci rozlisenia obrazovky
+    window.update_idletasks()                                                                                       # zabezpečí správne získanie rozlíšenia
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x = (screen_width // 2) - (width // 2) + shift_x
+    y = (screen_height // 2) - (height // 2) + shift_y
+    window.geometry(f"{width}x{height}+{x}+{y}")
+
+
     #=== Funkcia na vykreslenie trojuholníka ===
 def draw_triangle(base, height, angle, hypotenuse):
     canvas.delete("all")  # vyčistí predchádzajúci nákres
@@ -81,19 +90,10 @@ window.title(f'Angle Offset {version}')
 window.resizable(False,False)
 window.config(bg= main_color)
 
-#Rozmery okna a vypocet pozicie na stred obrazovky /pre kazde rozlisenie/
-    #Rozmery okna
-window_width = 320
-window_height = 425
-    # Ziska rozlisenie obrazovky
-screen_width = window.winfo_screenwidth()
-screen_height = window.winfo_screenheight()
-    # Vypocet pozicie okna na stred obrazovky
-x_shift = (screen_width // 2) - (window_width // 2)
-y_shift = (screen_height // 2) - (window_height // 2)
-    # Nastavenie pozicie okna a veľkosť okna
-window.geometry(f"{window_width}x{window_height}+{x_shift}+{y_shift}")
 
+# window_width = 320
+# window_height = 425
+    
 #Ikona
 ico_path = os.path.join(os.path.dirname(__file__), "icon.ico")         #ziska absolutnu cestu k suboru
 window.iconbitmap(ico_path)                                         
@@ -151,15 +151,14 @@ canvas_x_scroll.config(command=canvas.xview)
 # ===================================================================
 
 #Menu
-#Menu funkcie
 def quit_app():
     window.quit()
 
 def show_about():
     about_window = Tk()
+    center_window(about_window, 280, 150, 310, -135)                               #vycentrovanie about_window
     about_window.iconbitmap(ico_path)
     about_window.title('About')
-    about_window.minsize(280,120)
     about_window.resizable(False,False)
     about_window.config(bg= main_color)
     about_window_label = Label(about_window, text=
@@ -199,6 +198,9 @@ window.bind("<Control-n>", lambda event: distance())                # .bind("<Ke
 window.bind("<Control-q>", lambda event: quit_app())
 window.bind("<F1>", lambda event: show_about())
 
+
+
+center_window(window, 320, 425, 0, 0)                                     #centrovanie main window !musi byt na konci aby tkinter nacital vsetky widgety
 
 #Tkinter Mainloop
 window.mainloop()
