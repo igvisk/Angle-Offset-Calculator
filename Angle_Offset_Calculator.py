@@ -160,6 +160,7 @@ def show_about():
     "License:    MIT License", 
     bg=main_color, font=('Calibri', 11, 'bold'), fg=text_color, justify=LEFT)
     about_window_label.grid()
+    about_window.bind("<Escape>", lambda e: about_window.destroy())                   #shortcut - ESC - close about_window       
 
 # Vytvorenie hlavného menu
 menu_bar = Menu(window)
@@ -167,7 +168,7 @@ window.config(menu=menu_bar)
 
 # --- 1 Súbor ---
 file_menu = Menu(menu_bar, tearoff=0)
-file_menu.add_command(label="Nový výpočet  Ctrl+N", command=distance)          #Stlacenie vypoctu -funkcia distance
+file_menu.add_command(label="Nový výpočet  Ctrl+N", command=distance)                #Spustenie vypoctu -funkcia distance
 file_menu.add_separator()
 file_menu.add_command(label="Ukončiť             Ctrl+Q", command=window.quit)
 menu_bar.add_cascade(label="Súbor", menu=file_menu)
@@ -178,10 +179,10 @@ menu_bar.add_cascade(label="Súbor", menu=file_menu)
 # settings_menu.add_command(label="Resetovať vstupy", command=lambda: print("Reset"))
 # menu_bar.add_cascade(label="Nastavenia", menu=settings_menu)
 
-# --- 3 Help/Pomocník ---
+# --- 3 Help/Pomoc ---
 help_menu = Menu(menu_bar, tearoff=0)
 help_menu.add_command(label="O programe  F1", command=show_about)          
-menu_bar.add_cascade(label="Help", menu=help_menu)
+menu_bar.add_cascade(label="Pomoc", menu=help_menu)
 
 # --- Klávesové skratky (bind) ---
 window.bind("<Control-n>", lambda event: distance())                # .bind("<Key-combination>", lambda event: run_function())
