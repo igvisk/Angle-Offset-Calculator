@@ -17,42 +17,37 @@ version = "1.4a"
 
 def distance():
     try:
-        length_cm = float(length_input.get().replace(',', '.'))             #prilahla odvesna + .replace ochrana proti zadaniu ciarky (dlzka vodorovnej ciary/zakladne leziacej na 0°)
+        length_cm = float(length_input.get().replace(',', '.'))                                                     #prilahla odvesna + .replace ochrana proti zadaniu ciarky (dlzka vodorovnej ciary/zakladne leziacej na 0°)
         angle_degree = float(angle_input.get().replace(',', '.'))
         # Prevod stupňov na radiány
         angle_rad = math.radians(angle_degree)
         # Vzdialenosť = dĺžka * tan(uhol)
-        opening_result = length_cm * math.tan(angle_rad)                    #!vypocet dlzky kolmice/otvoru pre zadany uhol - protilahla odvesna
-        hypotenuse = math.sqrt(length_cm**2 + opening_result**2)            #vypocet prepony
+        opening_result = length_cm * math.tan(angle_rad)                                                            #!vypocet dlzky kolmice/otvoru pre zadany uhol - protilahla odvesna
+        hypotenuse = math.sqrt(length_cm**2 + opening_result**2)                                                    #vypocet prepony
         result_label.config(text=f'Pri uhle {angle_degree}° vznikne otvor:\n{round(opening_result,2)} cm')          #ak potrebne, dopln info o prepone " /prepona: {round(hypotenuse,2)}cm"
     except ValueError:
         result_label.config(text="\nNezadal si číselné hodnoty!")
-
     draw_triangle(length_cm, opening_result, angle_degree, hypotenuse)                                              # goes to function draw_triangle(1.base,2.height,3.angle,4.hypotenuse/prepona)
 
-def center_window(window, width, height, shift_x, shift_y):                                                         #vycentrovanie okna v ramci rozlisenia obrazovky
+def center_window(window, width, height, offset_x, offset_y):                                                       #vycentrovanie okna v ramci rozlisenia obrazovky
     window.update_idletasks()                                                                                       # zabezpečí správne získanie rozlíšenia
     screen_width = window.winfo_screenwidth()
     screen_height = window.winfo_screenheight()
-    x = (screen_width // 2) - (width // 2) + shift_x
-    y = (screen_height // 2) - (height // 2) + shift_y
+    x = (screen_width // 2) - (width // 2) + offset_x
+    y = (screen_height // 2) - (height // 2) + offset_y
     window.geometry(f"{width}x{height}+{x}+{y}")
-
 
     #=== Funkcia na vykreslenie trojuholníka ===
 def draw_triangle(base, height, angle, hypotenuse):
-    canvas.delete("all")  # vyčistí predchádzajúci nákres
-
+    canvas.delete("all")                                                                                            # vyčistí predchádzajúci nákres
     # mierka - 1 cm = 5 px
     scale = 5
     base_px = base * scale
     height_px = height * scale
-
     # súradnice
     x0, y0 = 30, 220
     x1, y1 = x0 + base_px, y0
     x2, y2 = x1, y1 - height_px
-
     # trojuholník
     canvas.create_line(x0, y0, x1, y1, fill="white", width=1)   # základňa
     canvas.create_line(x1, y1, x2, y2, fill="red", width=4)     # výška (otvor)
@@ -156,7 +151,7 @@ def quit_app():
 
 def show_about():
     about_window = Tk()
-    center_window(about_window, 280, 150, 310, -135)                               #vycentrovanie about_window
+    center_window(about_window, 280, 150, 310, -135)                               #vycentrovanie about_window (window_name, window_width, window_height, offset_x, offset_y)
     about_window.iconbitmap(ico_path)
     about_window.title('About')
     about_window.resizable(False,False)
