@@ -13,7 +13,7 @@ from tkinter import *
 import math
 import os
 
-version = "1.4a"
+version = "1.4"
 
 def distance():
     try:
@@ -91,7 +91,7 @@ window.iconbitmap(ico_path)
 line_text_label = Label(window, text='Priamka 0°\n[cm]', bg=main_color, font=('Calibri', 11, 'bold'), fg=text_color)   #relief='sunken' - fajn na check hranic
 line_text_label.grid(row=0, column=0,  padx=0 , pady=0, sticky='s')                                             #sticky='s' -taha smerom dole south
 
-angle_text_label = Label(window, text='Uhol -fix 5°\n[°]', bg=main_color, font=('Calibri', 11, 'bold'), fg=text_color)
+angle_text_label = Label(window, text='Uhol\n[°]', bg=main_color, font=('Calibri', 11, 'bold'), fg=text_color)
 angle_text_label.grid(row=0, column=3, padx=0, pady=0, sticky='s')
 
 result_frame = Frame(window,bg=main_color, width=150, height=40)                                               #Do tohoto Framu som umiestnil label a klucove je pouzit columnspan=4 - koľko stĺpcov má widget zaberať.
@@ -132,7 +132,6 @@ canvas = Canvas(canvas_frame, bg='black', width=280, height=250,        #Tkinter
 canvas.grid(row=0, column=0)
 
 enable_drag(canvas)                                                     #aktivacia dragovania v ramci canvas!
-
 
 #Prepojenie scrollbarov s Canvasom
 canvas_y_scroll.config(command=canvas.yview)
@@ -188,8 +187,6 @@ menu_bar.add_cascade(label="Pomoc", menu=help_menu)
 window.bind("<Control-n>", lambda event: distance())                # .bind("<Key-combination>", lambda event: run_function())
 window.bind("<Control-q>", lambda event: quit_app())
 window.bind("<F1>", lambda event: show_about())
-
-
 
 center_window(window, 320, 405, 0, 0)                                     #centrovanie a rozmery main window !musi byt na konci aby tkinter nacital vsetky widgety
 
