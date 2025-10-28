@@ -13,7 +13,7 @@ from tkinter import *
 import math
 import os
 
-version = 1.3
+version = "1.4a"
 
 def distance():
     try:
@@ -78,9 +78,21 @@ inputtext_color = 'black'
 #GUI - basic
 window = Tk()
 window.title(f'Angle Offset {version}')
-window.minsize(280,300)
 window.resizable(False,False)
 window.config(bg= main_color)
+
+#Rozmery okna a vypocet pozicie na stred obrazovky /pre kazde rozlisenie/
+    #Rozmery okna
+window_width = 320
+window_height = 425
+    # Ziska rozlisenie obrazovky
+screen_width = window.winfo_screenwidth()
+screen_height = window.winfo_screenheight()
+    # Vypocet pozicie okna na stred obrazovky
+x_shift = (screen_width // 2) - (window_width // 2)
+y_shift = (screen_height // 2) - (window_height // 2)
+    # Nastavenie pozicie okna a veľkosť okna
+window.geometry(f"{window_width}x{window_height}+{x_shift}+{y_shift}")
 
 #Ikona
 ico_path = os.path.join(os.path.dirname(__file__), "icon.ico")         #ziska absolutnu cestu k suboru
