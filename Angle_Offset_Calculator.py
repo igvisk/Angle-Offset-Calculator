@@ -196,7 +196,7 @@ window.bind("<F1>", lambda event: show_about())
 
 
 
-center_window(window, 320, 425, 0, 0)                                     #centrovanie main window !musi byt na konci aby tkinter nacital vsetky widgety
+center_window(window, 320, 405, 0, 0)                                     #centrovanie main window !musi byt na konci aby tkinter nacital vsetky widgety
 
 #Tkinter Mainloop
 window.mainloop()
