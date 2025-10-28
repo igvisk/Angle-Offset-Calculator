@@ -151,18 +151,19 @@ def quit_app():
 
 def show_about():
     about_window = Tk()
-    center_window(about_window, 280, 150, 310, -135)                               #vycentrovanie about_window (window_name, window_width, window_height, offset_x, offset_y)
+    center_window(about_window, 280, 170, 310, -135)                               #vycentrovanie about_window (window_name, window_width, window_height, offset_x, offset_y)
     about_window.iconbitmap(ico_path)
     about_window.title('About')
     about_window.resizable(False,False)
     about_window.config(bg= main_color)
     about_window_label = Label(about_window, text=
-    f"Aplikácia: Uhlový kalkulátor otvoru\n"
+    "Aplikácia: Uhlový kalkulátor otvoru\n"
     f"Verzia: {version}\n"
-    f"\n\nAutor:     Igor Vitovský\n"
-    f"e-mail:   igvisk.pro@gmail.com\n"
-    f"GitHub: github.com/igvisk\n"
-    f"Copyright © 2025 Igor Vitovský", 
+    "\n\nAutor:     Igor Vitovský\n"
+    "e-mail:   igvisk.pro@gmail.com\n"
+    "GitHub: github.com/igvisk\n"
+    "Copyright © 2025 Igor Vitovský\n"
+    "License:    MIT License", 
     bg=main_color, font=('Calibri', 11, 'bold'), fg=text_color, justify=LEFT)
     about_window_label.grid()
 
